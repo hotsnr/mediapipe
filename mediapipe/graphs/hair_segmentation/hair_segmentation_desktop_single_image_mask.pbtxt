@@ -114,13 +114,8 @@ node {
 }
 
 node {
-  calculator: "ColorConvertCalculator"
-  input_stream: "RGBA_IN:hair_mask"
-  output_stream: "RGB_OUT:remove_alpha"
-}
-
-node {
-  calculator: "ColorConvertCalculator"
-  input_stream: "RGB_IN:remove_alpha"
-  output_stream: "GRAY_OUT:output_video"
+  calculator: "SetAlphaCalculator"
+  input_stream: "IMAGE:transformed_input_video"
+  input_stream: "ALPHA:hair_mask"
+  output_stream: "IMAGE:output_video"
 }
