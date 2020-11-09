@@ -38,3 +38,17 @@ cc_binary(
         ],
     }),
 )
+
+cc_binary(
+    name = "hair_segmentation_single_image_cpu",
+    deps = [
+        "//mediapipe/examples/desktop:single_image_run_graph_main",
+    ] + select({
+        "//mediapipe/gpu:disable_gpu": [
+            "//mediapipe/graphs/hair_segmentation:desktop_calculators",
+        ],
+        "//conditions:default": [
+            "//mediapipe/graphs/hair_segmentation:mobile_calculators",
+        ],
+    }),
+)
