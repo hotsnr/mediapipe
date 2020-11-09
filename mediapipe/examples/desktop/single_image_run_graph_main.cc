@@ -85,7 +85,9 @@ DEFINE_uint32(n, 2, "Number of passes");
     if (pass_n == FLAGS_n - 1)
     {
       cv::Mat output_frame_mat = mediapipe::formats::MatView(&output_frame);
-      cv::cvtColor(output_frame_mat, output_frame_mat, cv::COLOR_RGB2BGR);
+      if (output_frame_mat.channels() > 1)
+        cv::cvtColor(output_frame_mat, output_frame_mat, cv::COLOR_RGB2BGR);
+      cv::resize(output_frame_mat, output_frame_mat, camera_frame.size());
       cv::imwrite(FLAGS_output_image, output_frame_mat);
     }
   }
